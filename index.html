@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schweizer Motorrad Strecken</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green-dark: #1a2e1a;
+            --green-mid: #2d4a2d;
+            --green-accent: #4a7c4a;
+            --green-light: #6aab6a;
+            --text-light: #e8f0e8;
+            --text-muted: #a0b8a0;
+            --gold: #c9a84c;
+            --dark-bg: #0f1a0f;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(10,20,10,0.95), transparent);
+            backdrop-filter: blur(4px);
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 28px;
+            letter-spacing: 3px;
+            color: var(--green-light);
+        }
+
+        .nav-logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-light);
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.35) saturate(0.8);
+            transform: scale(1.05);
+            transition: transform 8s ease;
+        }
+
+        .hero:hover .hero-bg {
+            transform: scale(1.0);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(10,20,10,0.2) 0%,
+                rgba(10,20,10,0.1) 50%,
+                rgba(10,20,10,0.95) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid var(--green-accent);
+            color: var(--green-light);
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            margin-bottom: 30px;
+            border-radius: 2px;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: clamp(60px, 10vw, 130px);
+            line-height: 0.9;
+            letter-spacing: 4px;
+            color: var(--text-light);
+            text-shadow: 0 0 60px rgba(74,124,74,0.3);
+        }
+
+        .hero h1 span {
+            color: var(--green-light);
+        }
+
+        .hero-sub {
+            margin-top: 24px;
+            font-size: 16px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        .hero-scroll::after {
+            content: '';
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--green-accent), transparent);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ─── SECTION INTRO ─── */
+        .section-intro {
+            text-align: center;
+            padding: 100px 60px 60px;
+        }
+
+        .section-intro h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: clamp(36px, 5vw, 64px);
+            letter-spacing: 4px;
+            color: var(--text-light);
+        }
+
+        .section-intro h2 span {
+            color: var(--green-light);
+        }
+
+        .section-intro p {
+            margin-top: 16px;
+            color: var(--text-muted);
+            font-size: 15px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--green-accent);
+            margin: 24px auto 0;
+        }
+
+        /* ─── ROUTE CARD ─── */
+        .routes-section {
+            padding: 40px 60px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .route-card {
+            background: var(--green-dark);
+            border: 1px solid rgba(74,124,74,0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 80px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .route-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+        }
+
+        /* Photo + Title */
+        .route-photo {
+            position: relative;
+            height: 480px;
+            overflow: hidden;
+        }
+
+        .route-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.75) saturate(0.9);
+            transition: transform 0.6s ease;
+        }
+
+        .route-card:hover .route-photo img {
+            transform: scale(1.04);
+        }
+
+        .route-photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 40%, var(--green-dark) 100%);
+        }
+
+        .route-title-block {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+        }
+
+        .route-tag {
+            display: inline-block;
+            background: var(--green-accent);
+            color: var(--dark-bg);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 2px;
+            margin-bottom: 14px;
+        }
+
+        .route-title-block h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: clamp(40px, 6vw, 72px);
+            letter-spacing: 3px;
+            line-height: 1;
+            color: #fff;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+
+        .route-meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 12px;
+        }
+
+        .route-meta span {
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .route-meta span strong {
+            color: var(--green-light);
+        }
+
+        /* Description */
+        .route-body {
+            padding: 50px 50px 0;
+        }
+
+        .route-description {
+            font-size: 16px;
+            line-height: 1.9;
+            color: var(--text-muted);
+            max-width: 800px;
+            border-left: 3px solid var(--green-accent);
+            padding-left: 24px;
+        }
+
+        .route-highlights {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .highlight-pill {
+            background: rgba(74,124,74,0.15);
+            border: 1px solid rgba(74,124,74,0.3);
+            color: var(--green-light);
+            font-size: 12px;
+            letter-spacing: 1px;
+            padding: 8px 18px;
+            border-radius: 50px;
+        }
+
+        /* Map */
+        .route-map {
+            margin-top: 40px;
+            border-top: 1px solid rgba(74,124,74,0.15);
+        }
+
+        .map-label {
+            padding: 20px 50px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .map-label::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+            background: var(--green-accent);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: saturate(0.7) brightness(0.85);
+        }
+
+        /* ─── CONTACT ─── */
+        .contact-section {
+            background: var(--green-dark);
+            border-top: 1px solid rgba(74,124,74,0.2);
+            padding: 100px 60px;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: clamp(36px, 5vw, 60px);
+            letter-spacing: 4px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .contact-section p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 50px;
+            line-height: 1.7;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: rgba(74,124,74,0.08);
+            border: 1px solid rgba(74,124,74,0.25);
+            color: var(--text-light);
+            padding: 16px 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            border-radius: 3px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--green-accent);
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background: var(--green-accent);
+            color: var(--dark-bg);
+            border: none;
+            padding: 18px 40px;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 18px;
+            letter-spacing: 3px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: var(--green-light);
+            transform: translateY(-2px);
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--dark-bg);
+            border-top: 1px solid rgba(74,124,74,0.1);
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer .logo {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 20px;
+            letter-spacing: 3px;
+            color: var(--green-accent);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-logo">MOTO<span>CH</span></div>
+        <ul class="nav-links">
+            <li><a href="#strecken">Strecken</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">🇨🇭 Schweiz · Motorrad · Abenteuer</div>
+            <h1>DIE BESTEN<br><span>STRECKEN</span><br>DER SCHWEIZ</h1>
+            <p class="hero-sub">Entdecke die schönsten Motorradrouten durch Wald, Berge & Pässe</p>
+        </div>
+        <div class="hero-scroll">Scroll</div>
+    </section>
+
+    <!-- INTRO -->
+    <div class="section-intro" id="strecken">
+        <h2>UNSERE <span>ROUTEN</span></h2>
+        <p>Handverlesene Strecken für jeden Fahrstil – von ruhigen Waldwegen bis zu epischen Alpenpässen.</p>
+        <div class="divider"></div>
+    </div>
+
+    <!-- ROUTES -->
+    <section class="routes-section">
+
+        <!-- ROUTE 1: Susten Pass -->
+        <div class="route-card">
+
+            <!-- Photo + Title -->
+            <div class="route-photo">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=80" alt="Sustenpass Schweiz">
+                <div class="route-photo-overlay"></div>
+                <div class="route-title-block">
+                    <div class="route-tag">🏔️ Alpenpass</div>
+                    <h2>SUSTENPASS</h2>
+                    <div class="route-meta">
+                        <span>📍 <strong>Uri → Bern</strong></span>
+                        <span>📏 <strong>45 km</strong></span>
+                        <span>⏱️ <strong>~1.5 Std</strong></span>
+                        <span>⭐ <strong>9.4 / 10</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="route-body">
+                <p class="route-description">
+                    Der Sustenpass verbindet das Reusstal im Kanton Uri mit dem Haslital im Kanton Bern und gilt als eine der 
+                    schönsten Passstrassen der Schweiz. Die Strecke schlängelt sich durch atemberaubende Berglandschaften, 
+                    vorbei an Gletschern, tosenden Wasserfällen und sattgrünen Alpweiden. Kurvenreiche Kehren, perfekter 
+                    Asphalt und kaum Verkehr machen diese Route zum absoluten Traum für jeden Motorradfahrer.
+                </p>
+                <div class="route-highlights">
+                    <span class="highlight-pill">🌊 Steingletscher</span>
+                    <span class="highlight-pill">🌿 Alpweiden</span>
+                    <span class="highlight-pill">🏔️ 2224m Höhe</span>
+                    <span class="highlight-pill">🛣️ Perfekter Asphalt</span>
+                    <span class="highlight-pill">📸 Traumhafte Aussicht</span>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div class="route-map">
+                <div class="map-label">Streckenverlauf</div>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d87699.23!2d8.35!3d46.72!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x478523c1d2b3a0b7%3A0x1234!2sWassen%2C+Uri!3m2!1d46.7!2d8.6!4m5!1s0x478fa8a0c0b0b0b0%3A0x5678!2sSustenpass!3m2!1d46.73!2d8.45!5e1!3m2!1sde!2sch!4v1234567890"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+        <!-- END ROUTE 1 -->
+
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="kontakt">
+        <h2>STRECKE VORSCHLAGEN</h2>
+        <p>Kennst du eine geile Route die hier fehlt?<br>Schreib uns – wir freuen uns über jeden Tipp! 🏍️</p>
+        <form class="contact-form">
+            <input type="text" placeholder="Dein Name">
+            <input type="email" placeholder="Deine E-Mail">
+            <input type="text" placeholder="Name der Strecke / Route">
+            <textarea placeholder="Beschreibe die Strecke kurz..."></textarea>
+            <button type="submit" class="btn-submit">ABSENDEN</button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="logo">MOTOCH</div>
+        <p>© 2025 MotoCH · Alle Rechte vorbehalten</p>
+    </footer>
+
+</body>
+</html>
